@@ -1,0 +1,2 @@
+var input = new StreamReader(Console.OpenStandardInput());
+var output = new StreamWriter(Console.OpenStandardOutput());

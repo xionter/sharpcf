@@ -1,0 +1,50 @@
+#!/bin/bash
+
+PROJECT="problemA.csproj"
+TEST_DIR="tests"
+
+dotnet build -c Release > /dev/null
+
+EXEC=$(find bin/Release -type f -executable | grep -v '\.dll$' | head -n 1)
+
+if [ -z "$EXEC" ]; then
+    echo "Executable not found"
+    exit 1
+fi
+
+i=1
+while true; do
+    INPUT="$TEST_DIR/input$i"
+    OUTPUT="$TEST_DIR/output$i"
+
+    if [ ! -f "$INPUT" ]; then
+        break
+    fi
+
+    echo "Test $i:"
+
+    RESULT=$($EXEC < "$INPUT")
+
+    if diff -q <(echo "$RESULT") "$OUTPUT" > /dev/null; then
+        echo "PASS"
+    else
+        echo "FAIL"
+        echo "Input:"
+        cat "$INPUT"
+        echo
+
+        echo "Expected:"
+        cat "$OUTPUT"
+        echo
+
+        echo "Got:"
+        echo "$RESULT"
+        echo
+        exit 1
+    fi
+
+    ((i++))
+done
+
+echo "All tests passed!🥚"
+
