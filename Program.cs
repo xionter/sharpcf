@@ -14,7 +14,7 @@ class Program
         parser.Start();
         parser.WaitForExit();
         
-        var contestPath = File.ReadAllText(Path.Join("parser", "current_contest.txt")).Trim();
+        var contestPath = File.ReadAllText(Path.Join("cfparser", "current_contest.txt")).Trim();
         var problemDirs = Directory.GetDirectories(contestPath);
         
         var testTemplate = Path.Join("templates", "tests_template.txt");
