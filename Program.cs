@@ -9,7 +9,7 @@ class Program
         var parser = new Process();
         parser.StartInfo.FileName = "go";
         parser.StartInfo.Arguments = "run .";
-        parser.StartInfo.WorkingDirectory = "parser";
+        parser.StartInfo.WorkingDirectory = "cfparser";
         parser.StartInfo.UseShellExecute = false;
         parser.Start();
         parser.WaitForExit();
